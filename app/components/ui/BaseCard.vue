@@ -198,7 +198,8 @@ function handleClick(): void {
 
 .base-card {
     /* 尺寸 - 固定宽度确保对齐 */
-    width: 280px;
+    width: 300px;
+    max-width: 100%;
     min-height: var(--card-min-height);
     padding: var(--card-padding);
 

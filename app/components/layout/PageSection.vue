@@ -343,9 +343,9 @@ const decorationRight = computed(() => {
 }
 
 .page-section__divider-line {
-    width: 80px;
+    width: 120px;
     height: 3px;
-    background: linear-gradient(90deg, var(--accent-color), var(--accent-color-dim));
+    background: linear-gradient(90deg, transparent, var(--accent-color) 50%, transparent);
     box-shadow: var(--glow-sm);
 }
 
@@ -456,7 +456,7 @@ const decorationRight = computed(() => {
     }
 
     .page-section__divider-line {
-        width: 60px;
+        width: 80px;
         height: 3px;
     }
 

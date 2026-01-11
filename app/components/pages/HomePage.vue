@@ -63,13 +63,13 @@
             <h2 class="motto" itemprop="description">{{ SITE_MOTTO }}</h2>
 
             <!-- 数据流装饰 -->
-            <div class="data-display" aria-hidden="true">
+            <!-- <div class="data-display" aria-hidden="true">
                 <span class="data-item">CREW: ACTIVE</span>
                 <span class="data-separator">|</span>
                 <span class="data-item">MISSION: EXPLORE</span>
                 <span class="data-separator">|</span>
                 <span class="data-item">STATUS: READY</span>
-            </div>
+            </div> -->
         </header>
 
         <!-- 导航按钮 -->

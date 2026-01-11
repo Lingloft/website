@@ -18,22 +18,49 @@
 -->
 
 <template>
-    <PageSection page-id="关于我" title="舰队档案">
+    <PageSection page-id="关于我" title="团队档案">
         <!-- 团队介绍文章 -->
         <article class="about-article" itemscope itemtype="https://schema.org/Organization" aria-label="关于灵阁团队的介绍">
             
-            <!-- 技能标签区域 -->
-            <section class="tags-section" aria-label="核心能力">
-                <div class="tags-header">
-                    <span class="tags-label">// CORE_CAPABILITIES</span>
-                </div>
-                <ul class="tags" role="list">
-                    <li v-for="(tag, index) in ABOUT_TAGS" :key="index" class="tag" itemprop="knowsAbout">
-                        <span class="tag-icon" aria-hidden="true">◆</span>
-                        {{ tag }}
-                    </li>
-                </ul>
+            <!-- 涉猎领域按钮 -->
+            <section class="domains-section" aria-label="涉猎领域">
+                <button class="domains-trigger" @click="showDomainsModal = true" aria-haspopup="dialog">
+                    <span class="trigger-icon" aria-hidden="true">◆</span>
+                    <span class="trigger-text">查看涉猎领域</span>
+                    <span class="trigger-arrow" aria-hidden="true">→</span>
+                </button>
             </section>
+
+            <!-- 涉猎领域弹窗 -->
+            <Teleport to="body">
+                <Transition name="modal">
+                    <div v-if="showDomainsModal" class="modal-overlay" @click.self="showDomainsModal = false">
+                        <div class="modal-content" role="dialog" aria-labelledby="modal-title" aria-modal="true">
+                            <!-- 弹窗角落装饰 -->
+                            <div class="modal-corner modal-corner--tl" aria-hidden="true" />
+                            <div class="modal-corner modal-corner--tr" aria-hidden="true" />
+                            <div class="modal-corner modal-corner--bl" aria-hidden="true" />
+                            <div class="modal-corner modal-corner--br" aria-hidden="true" />
+                            
+                            <!-- 弹窗头部 -->
+                            <div class="modal-header">
+                                <h3 id="modal-title" class="modal-title">// 涉猎领域</h3>
+                                <button class="modal-close" @click="showDomainsModal = false" aria-label="关闭">
+                                    ✕
+                                </button>
+                            </div>
+                            
+                            <!-- 领域列表 -->
+                            <ul class="domains-list" role="list">
+                                <li v-for="(domain, index) in ABOUT_DOMAINS" :key="index" class="domain-item" itemprop="knowsAbout">
+                                    <span class="domain-index" aria-hidden="true">{{ String(index + 1).padStart(2, '0') }}</span>
+                                    <span class="domain-name">{{ domain }}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </Transition>
+            </Teleport>
 
             <!-- 终端风格介绍内容 -->
             <section class="terminal-section" aria-label="团队介绍">
@@ -45,10 +72,10 @@
                             <span class="dot dot--yellow" />
                             <span class="dot dot--green" />
                         </div>
-                        <span class="terminal-title">lingloft_archive.sys</span>
+                        <span class="terminal-title">lingloft.readme</span>
                         <div class="terminal-status">
                             <span class="status-indicator" />
-                            CONNECTED
+                            ONLINE
                         </div>
                     </div>
                     
@@ -56,7 +83,7 @@
                     <div class="terminal-content">
                         <div class="terminal-line" v-for="(line, index) in ABOUT_CONTENT" :key="index">
                             <span v-if="line" class="line-prefix" aria-hidden="true">></span>
-                            <p :class="getLineClass(line, index)" :itemprop="index === 2 ? 'name' : (index === 3 ? 'description' : undefined)">
+                            <p :class="getLineClass(line, index)" :itemprop="index === 0 ? 'name' : (index === 2 ? 'description' : undefined)">
                                 {{ line || '&nbsp;' }}
                             </p>
                         </div>
@@ -70,7 +97,7 @@
                 </div>
             </section>
 
-            <!-- 数据面板 -->
+            <!-- 数据面板 - 仅桌面端显示 -->
             <section class="data-panel" aria-hidden="true">
                 <div class="data-row">
                     <span class="data-label">FOUNDED</span>
@@ -81,8 +108,8 @@
                     <span class="data-value data-value--active">ACTIVE</span>
                 </div>
                 <div class="data-row">
-                    <span class="data-label">SECTOR</span>
-                    <span class="data-value">TECH-7G</span>
+                    <span class="data-label">DOMAINS</span>
+                    <span class="data-value">{{ ABOUT_DOMAINS.length }}</span>
                 </div>
             </section>
         </article>
@@ -90,10 +117,10 @@
         <!-- 导航按钮 -->
         <template #buttons>
             <nav class="about-nav" role="navigation" aria-label="页面导航">
-                <BaseButton variant="primary" @click="switchPage('我的项目')" aria-label="查看作战系统">
+                <BaseButton variant="primary" @click="switchPage('我的项目')" aria-label="查看项目">
                     {{ BUTTON_TEXTS.projects }}
                 </BaseButton>
-                <BaseButton variant="secondary" @click="switchPage('主页')" aria-label="返回指挥中心">
+                <BaseButton variant="secondary" @click="switchPage('主页')" aria-label="返回首页">
                     {{ BUTTON_TEXTS.home }}
                 </BaseButton>
             </nav>
@@ -104,22 +131,26 @@
 <script setup lang="ts">
 /**
  * 关于我页面组件
- * 
+ *
  * 展示团队介绍信息，包括：
- * - 核心能力标签
+ * - 涉猎领域（弹窗展示）
  * - 终端风格的详细介绍
- * - 数据面板
- * 
+ * - 数据面板（仅桌面端）
+ *
  * SEO 说明：
  * - 使用 Schema.org Organization 微数据
  * - 语义化的 article/section 结构
  */
 
-import { ABOUT_TAGS, ABOUT_CONTENT, BUTTON_TEXTS } from '~/config/site.config'
+import { ABOUT_DOMAINS, ABOUT_CONTENT, BUTTON_TEXTS } from '~/config/site.config'
 
 // ==================== Composables ====================
 
 const { switchPage } = usePageNavigation()
+
+// ==================== 响应式状态 ====================
+
+const showDomainsModal = ref(false)
 
 // ==================== 方法 ====================
 
@@ -128,10 +159,8 @@ const { switchPage } = usePageNavigation()
  */
 function getLineClass(line: string, index: number): string {
     if (!line) return 'line-empty'
-    if (line.startsWith('[') || line.startsWith('//')) return 'line-system'
     if (line.includes('灵阁') || line.includes('LingLoft')) return 'line-highlight'
-    if (line.includes('：') || line.includes(':')) return 'line-label'
-    if (line.includes('|')) return 'line-data'
+    if (line.includes('创新')) return 'line-accent'
     return 'line-normal'
 }
 </script>
@@ -148,64 +177,212 @@ function getLineClass(line: string, index: number): string {
     gap: 30px;
 }
 
-/* ==================== 标签区域 ==================== */
+/* ==================== 涉猎领域按钮 ==================== */
 
-.tags-section {
+.domains-section {
     width: 100%;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.tags-header {
-    margin-bottom: 16px;
-}
-
-.tags-label {
-    font-family: var(--font-family-mono);
-    font-size: var(--font-size-xs);
-    color: var(--text-tertiary);
-    letter-spacing: var(--letter-spacing-wide);
-}
-
-/* ==================== 标签容器 ==================== */
-
-.tags {
-    display: flex;
-    flex-direction: row;
     justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    padding: 0;
-    list-style: none;
 }
 
-/* ==================== 单个标签样式 ==================== */
-
-.tag {
+.domains-trigger {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
+    gap: 12px;
+    padding: 14px 28px;
     background: var(--bg-card);
     border: 1px solid var(--border-primary);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-card);
     transition: var(--transition-default);
+    cursor: pointer;
+    color: var(--text-primary);
+    font-size: var(--font-size-md);
+}
+
+.domains-trigger:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: var(--accent-color);
+}
+
+.trigger-icon {
+    color: var(--accent-color);
+    font-size: var(--font-size-sm);
+}
+
+.trigger-text {
+    font-family: var(--font-family-mono);
+    letter-spacing: var(--letter-spacing);
+}
+
+.trigger-arrow {
+    color: var(--accent-color);
+    transition: transform var(--transition-fast);
+}
+
+.domains-trigger:hover .trigger-arrow {
+    transform: translateX(4px);
+}
+
+/* ==================== 弹窗遮罩 ==================== */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+/* ==================== 弹窗内容 ==================== */
+
+.modal-content {
+    position: relative;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card-hover);
+    max-width: 400px;
+    width: 100%;
+    padding: 24px;
+}
+
+/* ==================== 弹窗角落装饰 ==================== */
+
+.modal-corner {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+}
+
+.modal-corner--tl {
+    top: 8px;
+    left: 8px;
+    border-top: 2px solid var(--accent-color);
+    border-left: 2px solid var(--accent-color);
+}
+
+.modal-corner--tr {
+    top: 8px;
+    right: 8px;
+    border-top: 2px solid var(--accent-color);
+    border-right: 2px solid var(--accent-color);
+}
+
+.modal-corner--bl {
+    bottom: 8px;
+    left: 8px;
+    border-bottom: 2px solid var(--accent-color);
+    border-left: 2px solid var(--accent-color);
+}
+
+.modal-corner--br {
+    bottom: 8px;
+    right: 8px;
+    border-bottom: 2px solid var(--accent-color);
+    border-right: 2px solid var(--accent-color);
+}
+
+/* ==================== 弹窗头部 ==================== */
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.modal-title {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-lg);
+    color: var(--accent-color);
+    margin: 0;
+    letter-spacing: var(--letter-spacing);
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    color: var(--text-tertiary);
+    font-size: var(--font-size-lg);
+    cursor: pointer;
+    padding: 4px 8px;
+    transition: color var(--transition-fast);
+}
+
+.modal-close:hover {
+    color: var(--accent-color);
+}
+
+/* ==================== 领域列表 ==================== */
+
+.domains-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.domain-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-secondary);
+    border-radius: var(--radius-md);
+    transition: var(--transition-default);
+}
+
+.domain-item:hover {
+    border-color: var(--accent-color);
+    transform: translateX(4px);
+}
+
+.domain-index {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-xs);
+    color: var(--accent-color);
+    opacity: 0.6;
+}
+
+.domain-name {
     font-size: var(--font-size-md);
     color: var(--text-primary);
 }
 
-.tag-icon {
-    color: var(--accent-color);
-    font-size: var(--font-size-xs);
+/* ==================== 弹窗动画 ==================== */
+
+.modal-enter-active,
+.modal-leave-active {
+    transition: opacity 0.3s ease;
 }
 
-.tag:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-card-hover);
-    border-color: var(--accent-color);
+.modal-enter-active .modal-content,
+.modal-leave-active .modal-content {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.modal-enter-from,
+.modal-leave-to {
+    opacity: 0;
+}
+
+.modal-enter-from .modal-content,
+.modal-leave-to .modal-content {
+    transform: scale(0.9);
+    opacity: 0;
 }
 
 /* ==================== 终端区域 ==================== */
@@ -315,22 +492,14 @@ function getLineClass(line: string, index: number): string {
     height: 1.8em;
 }
 
-.line-system {
-    color: var(--accent-color);
-}
-
 .line-highlight {
     color: var(--text-primary);
     font-weight: 600;
 }
 
-.line-label {
-    color: var(--text-secondary);
-}
-
-.line-data {
-    color: var(--accent-color-dim);
-    letter-spacing: var(--letter-spacing);
+.line-accent {
+    color: var(--accent-color);
+    font-weight: 500;
 }
 
 .line-normal {
@@ -412,31 +581,24 @@ function getLineClass(line: string, index: number): string {
         padding: 16px;
     }
 
+    /* 手机端隐藏数据面板 */
     .data-panel {
-        flex-direction: column;
-        gap: 16px;
-        padding: 16px;
-    }
-
-    .data-row {
-        flex-direction: row;
-        justify-content: space-between;
-        width: 100%;
+        display: none;
     }
 }
 
 @media (max-width: 480px) {
-    .tags {
-        flex-direction: column;
-    }
-
-    .tag {
-        width: 100%;
-        justify-content: center;
+    .domains-trigger {
+        padding: 12px 20px;
+        font-size: var(--font-size-sm);
     }
 
     .terminal-dots {
         display: none;
+    }
+
+    .modal-content {
+        padding: 20px;
     }
 }
 </style>
