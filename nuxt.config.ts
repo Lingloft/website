@@ -197,8 +197,8 @@ export default defineNuxtConfig({
           innerHTML: `var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?1876c19be2c879da708639abf000f877";
-  var s = document.getElementsByTagName("script")[0];
+  hm.src = "https://hm.baidu.com/hm.js?9008efaf333f4b6ebb4449adc4a174eb";
+  var s = document.getElementsByTagName("script")[0]; 
   s.parentNode.insertBefore(hm, s);
 })();`,
         },
