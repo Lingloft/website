@@ -1,111 +1,275 @@
 /**
- * CSS 变量定义文件
+ * CSS 变量定义文件 - 灵阁 LingLoft
+ * 
+ * 视觉风格：明日方舟 / 战术UI / 未来舰队控制台
  * 
  * 定义全局主题变量，包括：
- * - 主题色彩
- * - 阴影效果
- * - 圆角尺寸
- * - 过渡动画
+ * - 深碳黑背景色系
+ * - 钛金灰文字色系
+ * - 高压电蓝强调色
+ * - 光效和发光效果
+ * - 战术UI装饰元素
  * 
  * 使用方式：var(--变量名)
  */
 
 :root {
-    /* ==================== 主题色彩 ==================== */
+    /* ==================== 核心色彩系统 ==================== */
 
-    /* 主题色 - 天蓝色 */
-    --theme-color: rgb(103, 171, 255);
+    /* 高压电蓝 - 唯一强调色 */
+    --accent-color: #00d4ff;
+    --accent-color-rgb: 0, 212, 255;
+    --accent-color-dim: rgba(0, 212, 255, 0.6);
+    --accent-color-glow: rgba(0, 212, 255, 0.4);
+    --accent-color-subtle: rgba(0, 212, 255, 0.15);
+    --accent-color-ultra-subtle: rgba(0, 212, 255, 0.08);
 
-    /* 主题色 RGB 值（用于 rgba 函数） */
-    --theme-color-rgb: 103, 171, 255;
+    /* 深碳黑背景色系 */
+    --bg-primary: #0a0a0f;
+    --bg-secondary: #0d0d14;
+    --bg-tertiary: #12121a;
+    --bg-card: rgba(15, 15, 22, 0.85);
+    --bg-card-hover: rgba(20, 20, 30, 0.95);
+    --bg-overlay: rgba(10, 10, 15, 0.9);
 
-    /* 背景色 */
-    --background-color: #ffffff;
+    /* 钛金灰文字色系 */
+    --text-primary: #e8e8ec;
+    --text-secondary: #a0a0a8;
+    --text-tertiary: #6a6a72;
+    --text-accent: var(--accent-color);
+    --text-muted: rgba(160, 160, 168, 0.6);
 
-    /* 文字颜色 */
-    --text-color: #000000;
+    /* 边框色系 */
+    --border-primary: rgba(0, 212, 255, 0.3);
+    --border-secondary: rgba(0, 212, 255, 0.15);
+    --border-subtle: rgba(255, 255, 255, 0.05);
+    --border-glow: rgba(0, 212, 255, 0.5);
 
-    /* 文字颜色（浅色） */
-    --text-color-light: rgba(103, 171, 255, 0.6);
+    /* 兼容旧变量名 */
+    --theme-color: var(--accent-color);
+    --theme-color-rgb: var(--accent-color-rgb);
+    --background-color: var(--bg-primary);
+    --text-color: var(--text-primary);
+    --text-color-light: var(--text-secondary);
+    --white: var(--text-primary);
 
-    /* 白色 */
-    --white: #ffffff;
+    /* ==================== 光效系统 ==================== */
 
-    /* ==================== 阴影效果 ==================== */
+    /* 发光阴影 - 电蓝光效 */
+    --glow-sm: 0 0 10px rgba(0, 212, 255, 0.3);
+    --glow-md: 0 0 20px rgba(0, 212, 255, 0.4);
+    --glow-lg: 0 0 40px rgba(0, 212, 255, 0.5);
+    --glow-xl: 0 0 60px rgba(0, 212, 255, 0.6);
 
-    /* 主阴影 - 用于按钮、卡片等 */
-    --shadow-primary: 0 2px 20px rgba(103, 171, 255, 0.3);
+    /* 内发光效果 */
+    --inner-glow: inset 0 0 20px rgba(0, 212, 255, 0.1);
+    --inner-glow-strong: inset 0 0 30px rgba(0, 212, 255, 0.2);
 
-    /* 悬停阴影 - 用于卡片悬停效果 */
-    --shadow-hover: 0 0 5px var(--theme-color);
+    /* 卡片阴影 */
+    --shadow-card: 
+        0 4px 20px rgba(0, 0, 0, 0.5),
+        0 0 1px rgba(0, 212, 255, 0.3);
+    --shadow-card-hover: 
+        0 8px 40px rgba(0, 0, 0, 0.6),
+        0 0 30px rgba(0, 212, 255, 0.3),
+        var(--inner-glow);
+
+    /* 按钮阴影 */
+    --shadow-button: 
+        0 2px 15px rgba(0, 212, 255, 0.3),
+        0 0 1px rgba(0, 212, 255, 0.5);
+    --shadow-button-hover: 
+        0 4px 25px rgba(0, 212, 255, 0.5),
+        0 0 40px rgba(0, 212, 255, 0.3);
 
     /* 头像阴影 */
-    --shadow-avatar: 0 0 2em rgba(65, 151, 255, 0.2);
+    --shadow-avatar: 0 0 30px rgba(0, 212, 255, 0.3);
+    --shadow-avatar-hover: 0 0 50px rgba(0, 212, 255, 0.5);
 
-    /* 头像悬停阴影 */
-    --shadow-avatar-hover: 0 0 2em rgba(65, 151, 255, 0.533);
+    /* 兼容旧变量名 */
+    --shadow-primary: var(--shadow-card);
+    --shadow-hover: var(--shadow-card-hover);
 
     /* ==================== 圆角尺寸 ==================== */
 
-    /* 按钮圆角 */
-    --border-radius-button: 15px;
+    /* 保留现代圆角设计 */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-full: 50%;
 
-    /* 卡片圆角 */
-    --border-radius-card: 15px;
-
-    /* 标签圆角 */
-    --border-radius-tag: 10px;
-
-    /* 圆形（头像等） */
-    --border-radius-circle: 50%;
+    /* 兼容旧变量名 */
+    --border-radius-button: var(--radius-lg);
+    --border-radius-card: var(--radius-xl);
+    --border-radius-tag: var(--radius-md);
+    --border-radius-circle: var(--radius-full);
 
     /* ==================== 过渡动画 ==================== */
 
     /* 默认过渡时间 */
-    --transition-duration: 0.5s;
+    --transition-duration: 0.4s;
+    --transition-duration-fast: 0.2s;
+    --transition-duration-slow: 0.6s;
 
-    /* 默认缓动函数 - 弹性效果 */
-    --transition-timing: cubic-bezier(0.2, 0.84, 0, 1);
+    /* 缓动函数 */
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
 
     /* 完整过渡属性 */
-    --transition-default: var(--transition-duration) var(--transition-timing);
+    --transition-default: var(--transition-duration) var(--ease-out-expo);
+    --transition-fast: var(--transition-duration-fast) var(--ease-in-out);
+    --transition-glow: var(--transition-duration-slow) var(--ease-out-expo);
 
-    /* 快速过渡（用于滤镜等） */
-    --transition-fast: 300ms ease;
+    /* 兼容旧变量名 */
+    --transition-timing: var(--ease-out-expo);
 
     /* ==================== 尺寸定义 ==================== */
 
-    /* 按钮宽度 */
-    --button-width: 210px;
-
-    /* 按钮高度 */
-    --button-height: 50px;
+    /* 按钮尺寸 */
+    --button-width: 220px;
+    --button-height: 52px;
+    --button-padding: 14px 28px;
 
     /* 头像尺寸 */
-    --avatar-size: 200px;
+    --avatar-size: 180px;
 
-    /* 卡片最大宽度 */
-    --card-max-width: 300px;
-
-    /* 卡片图标尺寸 */
-    --card-icon-size: 100px;
+    /* 卡片尺寸 */
+    --card-max-width: 320px;
+    --card-min-height: 280px;
+    --card-padding: 24px;
+    --card-icon-size: 80px;
 
     /* 联系方式图标尺寸 */
-    --contact-icon-size: 40px;
+    --contact-icon-size: 36px;
 
     /* ==================== 字体设置 ==================== */
 
-    /* 默认字体族 */
-    --font-family: sans-serif;
+    /* 字体族 - 使用系统字体栈 */
+    --font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-family-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
 
     /* 字间距 */
-    --letter-spacing: 1px;
+    --letter-spacing: 0.5px;
+    --letter-spacing-wide: 2px;
+    --letter-spacing-ultra: 4px;
 
-    /* ==================== 网格背景 ==================== */
+    /* 字体大小 */
+    --font-size-xs: 10px;
+    --font-size-sm: 12px;
+    --font-size-md: 14px;
+    --font-size-lg: 16px;
+    --font-size-xl: 20px;
+    --font-size-2xl: 28px;
+    --font-size-3xl: 40px;
+    --font-size-4xl: 56px;
+
+    /* ==================== 战术网格背景 ==================== */
 
     /* 网格线颜色 */
-    --grid-line-color: rgba(103, 171, 255, 0.07);
+    --grid-line-color: rgba(0, 212, 255, 0.04);
+    --grid-line-color-strong: rgba(0, 212, 255, 0.08);
 
     /* 网格尺寸 */
-    --grid-size: 30px;
+    --grid-size: 40px;
+    --grid-size-lg: 80px;
+
+    /* ==================== 战术装饰元素 ==================== */
+
+    /* 角落装饰尺寸 */
+    --corner-size: 12px;
+    --corner-thickness: 2px;
+
+    /* 扫描线效果 */
+    --scanline-opacity: 0.03;
+    --scanline-speed: 8s;
+
+    /* 噪点纹理 */
+    --noise-opacity: 0.02;
+
+    /* ==================== Z-Index 层级 ==================== */
+
+    --z-background: -1;
+    --z-content: 1;
+    --z-card: 10;
+    --z-overlay: 100;
+    --z-modal: 1000;
+    --z-tooltip: 10000;
+}
+
+/* ==================== 动画关键帧 ==================== */
+
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: var(--glow-sm);
+    }
+    50% {
+        box-shadow: var(--glow-md);
+    }
+}
+
+@keyframes border-flow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes scanline {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(100vh);
+    }
+}
+
+@keyframes flicker {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+@keyframes data-stream {
+    0% {
+        transform: translateY(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink-cursor {
+    0%, 50% {
+        border-color: var(--accent-color);
+    }
+    51%, 100% {
+        border-color: transparent;
+    }
 }

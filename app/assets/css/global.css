@@ -1,20 +1,32 @@
 /**
- * 全局样式文件
+ * 全局样式文件 - 灵阁 LingLoft
+ * 
+ * 视觉风格：明日方舟 / 战术UI / 未来舰队控制台
  * 
  * 包含：
  * - CSS 重置
  * - 基础元素样式
- * - 通用工具类
+ * - 战术UI装饰效果
  * - 页面过渡动画
+ * - 光效和发光效果
  */
 
 /* ==================== CSS 重置 ==================== */
 
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 html {
     height: 100%;
     width: 100%;
-    margin: 0;
-    padding: 0;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -22,14 +34,14 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 0;
-    padding: 0;
     min-height: 100%;
     width: 100%;
     text-align: center;
     font-family: var(--font-family);
-    background-color: var(--background-color);
-    color: var(--text-color);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
 
     /* 禁止文本选择（可选择区域除外） */
     -webkit-user-select: none;
@@ -48,6 +60,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 /* ==================== 通用元素样式 ==================== */
@@ -56,10 +69,8 @@ body {
     /* 默认过渡动画 */
     transition: var(--transition-default);
 
-    /* 字体加粗 */
-    font-weight: bold;
-
-    /* 字间距 */
+    /* 字体设置 */
+    font-weight: 500;
     letter-spacing: var(--letter-spacing);
 
     /* 防止字体大小自动调整 */
@@ -67,9 +78,6 @@ body {
     -moz-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
     text-size-adjust: 100%;
-
-    /* 盒模型 */
-    box-sizing: border-box;
 }
 
 /* 移除点击高亮 */
@@ -77,92 +85,156 @@ body {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-/* 文本选中样式 */
+/* 文本选中样式 - 电蓝高亮 */
 *::selection {
-    background: var(--theme-color);
-    color: var(--white);
+    background: var(--accent-color);
+    color: var(--bg-primary);
 }
 
 /* 隐藏滚动条但保持滚动功能 */
 *::-webkit-scrollbar {
-    width: 0;
-    height: 0;
+    width: 4px;
+    height: 4px;
+}
+
+*::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+*::-webkit-scrollbar-thumb {
+    background: var(--accent-color-dim);
+    border-radius: 2px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color);
 }
 
 /* ==================== 标题样式 ==================== */
 
 h1 {
-    font-size: 40px;
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
     margin: 0;
-    font-weight: bold;
-    color: var(--theme-color);
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    text-shadow: 0 0 30px var(--accent-color-glow);
 }
 
 h2 {
-    font-size: 12px;
-    font-weight: 700;
+    font-size: var(--font-size-sm);
+    font-weight: 600;
     margin-bottom: 20px;
-    color: var(--theme-color);
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-ultra);
+}
+
+h3 {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: var(--letter-spacing);
+}
+
+/* ==================== 段落样式 ==================== */
+
+p {
+    font-size: var(--font-size-md);
+    color: var(--text-secondary);
+    line-height: 1.8;
 }
 
 /* ==================== 按钮基础样式 ==================== */
 
 button {
-    color: var(--white);
-    border: none;
-    box-shadow: var(--shadow-primary);
-    border-radius: var(--border-radius-button);
+    position: relative;
+    color: var(--text-primary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-lg);
     cursor: pointer;
-    font-size: 17px;
+    font-size: var(--font-size-md);
+    font-weight: 600;
     height: var(--button-height);
-    margin: 15px 0;
+    margin: 12px 0;
     width: var(--button-width);
-    background-color: var(--theme-color);
-    filter: brightness(1);
+    background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-tertiary) 100%);
+    box-shadow: var(--shadow-button);
     outline: none;
     transition: var(--transition-default);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    overflow: hidden;
+}
+
+/* 按钮发光边框效果 */
+button::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, var(--accent-color) 0%, transparent 50%, var(--accent-color) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity var(--transition-duration) var(--ease-out-expo);
 }
 
 button:hover {
-    filter: brightness(1.1);
-    scale: 1.05;
+    background: linear-gradient(135deg, var(--bg-card-hover) 0%, var(--bg-tertiary) 100%);
+    box-shadow: var(--shadow-button-hover);
+    transform: translateY(-2px);
+    border-color: var(--accent-color);
+}
+
+button:hover::before {
+    opacity: 1;
 }
 
 button:active {
-    scale: 0.95;
-    filter: brightness(1);
+    transform: translateY(0) scale(0.98);
+    box-shadow: var(--shadow-button);
 }
 
 /* ==================== 页面过渡动画 ==================== */
 
-/* 页面进入动画 */
+/* 页面进入/离开动画 */
 .page-enter-active,
 .page-leave-active {
-    transition: all 0.5s var(--transition-timing);
+    transition: all 0.5s var(--ease-out-expo);
 }
 
 .page-enter-from {
     opacity: 0;
-    transform: scale(0);
+    transform: scale(0.95);
+    filter: blur(10px);
 }
 
 .page-leave-to {
     opacity: 0;
-    transform: scale(0);
+    transform: scale(0.95);
+    filter: blur(10px);
 }
 
 /* ==================== 显示/隐藏工具类 ==================== */
 
 .hidden {
     visibility: hidden;
-    transform: scale(0);
+    transform: scale(0.95);
     opacity: 0;
+    filter: blur(10px);
+    pointer-events: none;
 }
 
 .visible {
     visibility: visible;
     transform: scale(1);
     opacity: 1;
+    filter: blur(0);
+    pointer-events: auto;
 }
 
 /* ==================== 链接样式 ==================== */
@@ -170,8 +242,258 @@ button:active {
 a {
     text-decoration: none;
     color: inherit;
+    transition: var(--transition-fast);
 }
 
 a:hover {
-    color: var(--theme-color);
+    color: var(--accent-color);
+    text-shadow: 0 0 10px var(--accent-color-glow);
+}
+
+/* ==================== 战术装饰元素 ==================== */
+
+/* 角落装饰 - 左上 */
+.tactical-corner-tl {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--corner-size);
+    height: var(--corner-size);
+    border-top: var(--corner-thickness) solid var(--accent-color);
+    border-left: var(--corner-thickness) solid var(--accent-color);
+    pointer-events: none;
+}
+
+/* 角落装饰 - 右上 */
+.tactical-corner-tr {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: var(--corner-size);
+    height: var(--corner-size);
+    border-top: var(--corner-thickness) solid var(--accent-color);
+    border-right: var(--corner-thickness) solid var(--accent-color);
+    pointer-events: none;
+}
+
+/* 角落装饰 - 左下 */
+.tactical-corner-bl {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: var(--corner-size);
+    height: var(--corner-size);
+    border-bottom: var(--corner-thickness) solid var(--accent-color);
+    border-left: var(--corner-thickness) solid var(--accent-color);
+    pointer-events: none;
+}
+
+/* 角落装饰 - 右下 */
+.tactical-corner-br {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: var(--corner-size);
+    height: var(--corner-size);
+    border-bottom: var(--corner-thickness) solid var(--accent-color);
+    border-right: var(--corner-thickness) solid var(--accent-color);
+    pointer-events: none;
+}
+
+/* 战术标签文字 */
+.tactical-label {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-ultra);
+    opacity: 0.6;
+}
+
+/* 战术分隔线 */
+.tactical-divider {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+    margin: 20px auto;
+    position: relative;
+}
+
+.tactical-divider::before,
+.tactical-divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background: var(--accent-color);
+    border-radius: 1px;
+}
+
+.tactical-divider::before {
+    left: -10px;
+}
+
+.tactical-divider::after {
+    right: -10px;
+}
+
+/* ==================== 发光效果工具类 ==================== */
+
+.glow-text {
+    text-shadow: 0 0 20px var(--accent-color-glow);
+}
+
+.glow-box {
+    box-shadow: var(--glow-md);
+}
+
+.glow-border {
+    border: 1px solid var(--border-primary);
+    box-shadow: var(--inner-glow);
+}
+
+/* ==================== 扫描线效果 ==================== */
+
+.scanline-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: var(--z-overlay);
+    overflow: hidden;
+}
+
+.scanline-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200%;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 212, 255, var(--scanline-opacity)) 2px,
+        rgba(0, 212, 255, var(--scanline-opacity)) 4px
+    );
+    animation: scanline var(--scanline-speed) linear infinite;
+}
+
+/* ==================== 噪点纹理 ==================== */
+
+.noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: var(--z-overlay);
+    opacity: var(--noise-opacity);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* ==================== 数据流动画 ==================== */
+
+.data-stream {
+    position: absolute;
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-xs);
+    color: var(--accent-color-dim);
+    writing-mode: vertical-rl;
+    animation: data-stream 10s linear infinite;
+    opacity: 0.3;
+}
+
+/* ==================== 脉冲动画 ==================== */
+
+.pulse {
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* ==================== 闪烁效果 ==================== */
+
+.flicker {
+    animation: flicker 4s ease-in-out infinite;
+}
+
+/* ==================== 打字机效果 ==================== */
+
+.typewriter {
+    overflow: hidden;
+    border-right: 2px solid var(--accent-color);
+    white-space: nowrap;
+    animation: 
+        typing 2s steps(30, end),
+        blink-cursor 0.75s step-end infinite;
+}
+
+/* ==================== 响应式调整 ==================== */
+
+@media (max-width: 768px) {
+    :root {
+        --font-size-3xl: 32px;
+        --font-size-2xl: 24px;
+        --avatar-size: 140px;
+        --button-width: 180px;
+        --button-height: 48px;
+        --card-max-width: 280px;
+    }
+
+    h1 {
+        letter-spacing: var(--letter-spacing);
+    }
+
+    h2 {
+        letter-spacing: var(--letter-spacing-wide);
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --font-size-3xl: 28px;
+        --font-size-2xl: 20px;
+        --avatar-size: 120px;
+        --button-width: 160px;
+        --card-max-width: 260px;
+        --grid-size: 30px;
+    }
+}
+
+/* ==================== 无障碍访问 ==================== */
+
+/* 焦点可见性 */
+:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+/* 减少动画（用户偏好） */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ==================== 视觉隐藏（仅屏幕阅读器可见） ==================== */
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }

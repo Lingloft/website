@@ -1,11 +1,14 @@
 <!--
-  基础卡片组件
+  基础卡片组件 - 灵阁 LingLoft
+  
+  视觉风格：明日方舟 / 战术UI / 未来舰队控制台
   
   功能：
   - 展示图标、标题和简介
   - 支持点击跳转链接
   - 支持不同类型的卡片样式（友情链接/项目）
-  - 统一的悬停和点击动画效果
+  - 战术风格的悬浮卡片效果
+  - 角落装饰和光效
   
   SEO 优化：
   - 使用语义化 HTML 标签（article, h3）
@@ -31,10 +34,13 @@
 -->
 
 <template>
-    <!-- 卡片容器 - 使用 article 标签表示独立内容 -->
+    <!-- 卡片容器 -->
     <article 
         class="base-card" 
-        :class="{ 'base-card--clickable': hasValidLink }"
+        :class="[
+            `base-card--${type}`,
+            { 'base-card--clickable': hasValidLink }
+        ]"
         @click="handleClick"
         @keydown.enter="handleClick"
         @keydown.space.prevent="handleClick"
@@ -44,22 +50,50 @@
         itemscope
         :itemtype="type === 'project' ? 'https://schema.org/CreativeWork' : 'https://schema.org/Person'"
     >
-        <!-- 图标 - 根据类型应用不同样式 -->
-        <img 
-            :src="iconPath" 
-            :alt="`${title}的${type === 'friend' ? '头像' : '图标'}`" 
-            :class="iconClass"
-            width="80"
-            height="80"
-            loading="lazy"
-            itemprop="image"
-        />
+        <!-- 角落装饰 -->
+        <div class="card-corner card-corner--tl" aria-hidden="true" />
+        <div class="card-corner card-corner--tr" aria-hidden="true" />
+        <div class="card-corner card-corner--bl" aria-hidden="true" />
+        <div class="card-corner card-corner--br" aria-hidden="true" />
 
-        <!-- 标题 - 使用 h3 避免破坏页面标题层级 -->
-        <h3 class="base-card__title" itemprop="name">{{ title }}</h3>
+        <!-- 顶部标签 -->
+        <div class="card-label" aria-hidden="true">
+            <span class="label-text">{{ type === 'friend' ? 'ALLY' : 'SYSTEM' }}</span>
+            <span class="label-status" :class="{ 'label-status--active': hasValidLink }">
+                {{ hasValidLink ? '●' : '○' }}
+            </span>
+        </div>
+
+        <!-- 图标容器 -->
+        <div class="card-icon-container">
+            <!-- 图标光效 -->
+            <div class="icon-glow" aria-hidden="true" />
+            <!-- 图标 -->
+            <img 
+                :src="iconPath" 
+                :alt="`${title}的${type === 'friend' ? '头像' : '图标'}`" 
+                :class="iconClass"
+                width="80"
+                height="80"
+                loading="lazy"
+                itemprop="image"
+            />
+            <!-- 扫描环（仅友情链接） -->
+            <div v-if="type === 'friend'" class="icon-ring" aria-hidden="true" />
+        </div>
+
+        <!-- 标题 -->
+        <h3 class="card-title" itemprop="name">{{ title }}</h3>
 
         <!-- 描述 -->
-        <p class="base-card__description" itemprop="description">{{ description }}</p>
+        <p class="card-description" itemprop="description">{{ description }}</p>
+
+        <!-- 操作指示 -->
+        <div v-if="hasValidLink" class="card-action" aria-hidden="true">
+            <span class="action-line" />
+            <span class="action-text">{{ type === 'friend' ? 'CONNECT' : 'LAUNCH' }}</span>
+            <span class="action-icon">→</span>
+        </div>
 
         <!-- 隐藏的链接 - 用于 SEO 和无障碍访问 -->
         <a 
@@ -67,7 +101,7 @@
             :href="link"
             target="_blank"
             rel="noopener noreferrer"
-            class="base-card__link"
+            class="card-link"
             :aria-label="`访问${title}的网站`"
             itemprop="url"
             @click.stop
@@ -133,10 +167,10 @@ const iconPath = computed(() => {
  * 根据卡片类型应用不同样式
  */
 const iconClass = computed(() => [
-    'base-card__icon',
+    'card-icon',
     props.type === 'friend'
-        ? 'base-card__icon--friend'
-        : 'base-card__icon--project',
+        ? 'card-icon--friend'
+        : 'card-icon--project',
 ])
 
 /**
@@ -163,24 +197,24 @@ function handleClick(): void {
 /* ==================== 卡片容器样式 ==================== */
 
 .base-card {
-    /* 尺寸 */
-    max-height: 280px;
-    padding: 8vw 20px;
-    margin: 25px;
-    width: 100%;
-    max-width: var(--card-max-width);
+    /* 尺寸 - 固定宽度确保对齐 */
+    width: 280px;
+    min-height: var(--card-min-height);
+    padding: var(--card-padding);
 
     /* 外观 */
-    background-color: var(--white);
-    border-radius: var(--border-radius-card);
-    box-shadow: var(--shadow-primary);
+    background: var(--bg-card);
+    border: 1px solid var(--border-secondary);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-card);
 
     /* 布局 */
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     position: relative;
+    gap: 12px;
 
     /* 文本处理 */
     word-break: break-word;
@@ -199,76 +233,253 @@ function handleClick(): void {
 /* ==================== 卡片悬停效果 ==================== */
 
 .base-card:hover {
-    filter: brightness(1.02);
-    box-shadow: var(--shadow-hover);
+    background: var(--bg-card-hover);
+    border-color: var(--accent-color);
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-4px);
 }
 
 /* ==================== 卡片焦点效果（无障碍访问） ==================== */
 
 .base-card:focus {
-    outline: 2px solid var(--theme-color);
-    outline-offset: 4px;
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: var(--shadow-card-hover);
 }
 
 /* ==================== 卡片点击效果 ==================== */
 
 .base-card:active {
-    scale: 0.95;
-    filter: brightness(1);
+    transform: translateY(-2px);
+}
+
+/* ==================== 角落装饰 ==================== */
+
+.card-corner {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    pointer-events: none;
+    opacity: 0.5;
+    transition: opacity var(--transition-fast);
+}
+
+.base-card:hover .card-corner {
+    opacity: 1;
+}
+
+.card-corner--tl {
+    top: 12px;
+    left: 12px;
+    border-top: 2px solid var(--accent-color);
+    border-left: 2px solid var(--accent-color);
+}
+
+.card-corner--tr {
+    top: 12px;
+    right: 12px;
+    border-top: 2px solid var(--accent-color);
+    border-right: 2px solid var(--accent-color);
+}
+
+.card-corner--bl {
+    bottom: 12px;
+    left: 12px;
+    border-bottom: 2px solid var(--accent-color);
+    border-left: 2px solid var(--accent-color);
+}
+
+.card-corner--br {
+    bottom: 12px;
+    right: 12px;
+    border-bottom: 2px solid var(--accent-color);
+    border-right: 2px solid var(--accent-color);
+}
+
+/* ==================== 顶部标签 ==================== */
+
+.card-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.label-text {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+    letter-spacing: var(--letter-spacing-wide);
+}
+
+.label-status {
+    font-size: 8px;
+    color: var(--text-tertiary);
+}
+
+.label-status--active {
+    color: var(--accent-color);
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* ==================== 图标容器 ==================== */
+
+.card-icon-container {
+    position: relative;
+    width: calc(var(--card-icon-size) + 20px);
+    height: calc(var(--card-icon-size) + 20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+/* ==================== 图标光效 ==================== */
+
+.icon-glow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, var(--accent-color-subtle) 0%, transparent 70%);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity var(--transition-default);
+}
+
+.base-card:hover .icon-glow {
+    opacity: 1;
 }
 
 /* ==================== 卡片图标基础样式 ==================== */
 
-.base-card__icon {
+.card-icon {
+    position: relative;
     width: var(--card-icon-size);
     height: var(--card-icon-size);
-    margin-bottom: 10px;
     object-fit: cover;
-
-    /* 优化渲染性能 */
-    will-change: filter;
-    transition: filter var(--transition-fast);
+    z-index: 2;
+    transition: var(--transition-default);
 }
 
 /* ==================== 友情链接图标样式 ==================== */
 
-/* 圆形头像，带边框和阴影 */
-.base-card__icon--friend {
-    border-radius: var(--border-radius-circle);
-    border: 3px solid var(--white);
-    filter: drop-shadow(var(--shadow-primary));
+.card-icon--friend {
+    border-radius: var(--radius-full);
+    border: 2px solid var(--accent-color);
+    box-shadow: var(--glow-sm);
+}
+
+.base-card:hover .card-icon--friend {
+    box-shadow: var(--glow-md);
 }
 
 /* ==================== 项目图标样式 ==================== */
 
-/* 方形图标，无边框 */
-.base-card__icon--project {
-    border-radius: 0;
+.card-icon--project {
+    border-radius: var(--radius-md);
     border: none;
-    filter: none;
+    filter: brightness(0.9);
+}
+
+.base-card:hover .card-icon--project {
+    filter: brightness(1) drop-shadow(0 0 10px var(--accent-color-glow));
+}
+
+/* ==================== 扫描环 ==================== */
+
+.icon-ring {
+    position: absolute;
+    width: calc(var(--card-icon-size) + 16px);
+    height: calc(var(--card-icon-size) + 16px);
+    border: 1px solid var(--border-primary);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity var(--transition-default);
+}
+
+.base-card:hover .icon-ring {
+    opacity: 1;
+    animation: spin 10s linear infinite;
+}
+
+.icon-ring::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background: var(--accent-color);
+    border-radius: 50%;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 /* ==================== 卡片标题样式 ==================== */
 
-.base-card__title {
-    font-size: 40px;
+.card-title {
+    font-size: var(--font-size-xl);
     margin: 0;
-    font-weight: bold;
-    color: var(--theme-color);
+    font-weight: 600;
+    color: var(--text-primary);
+    text-align: center;
+    letter-spacing: var(--letter-spacing);
 }
 
 /* ==================== 卡片描述样式 ==================== */
 
-.base-card__description {
-    color: var(--text-color);
-    font-size: 14px;
-    margin-top: 10px;
+.card-description {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    margin: 0;
     text-align: center;
+    line-height: 1.6;
+    flex: 1;
+}
+
+/* ==================== 操作指示 ==================== */
+
+.card-action {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: 12px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: var(--transition-default);
+}
+
+.base-card:hover .card-action {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.action-line {
+    width: 20px;
+    height: 1px;
+    background: var(--accent-color);
+}
+
+.action-text {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-xs);
+    color: var(--accent-color);
+    letter-spacing: var(--letter-spacing);
+}
+
+.action-icon {
+    color: var(--accent-color);
+    font-size: var(--font-size-sm);
 }
 
 /* ==================== 隐藏链接样式 ==================== */
 
-.base-card__link {
+.card-link {
     position: absolute;
     inset: 0;
     z-index: 1;
@@ -287,5 +498,33 @@ function handleClick(): void {
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
+}
+
+/* ==================== 响应式调整 ==================== */
+
+@media (max-width: 768px) {
+    .base-card {
+        width: 100%;
+        max-width: 280px;
+        padding: 20px;
+        min-height: auto;
+    }
+
+    .card-corner {
+        width: 10px;
+        height: 10px;
+    }
+
+    .card-action {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 480px) {
+    .base-card {
+        width: 100%;
+        max-width: 260px;
+    }
 }
 </style>
