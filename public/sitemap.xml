@@ -5,40 +5,40 @@
 
     <!-- 主页 -->
     <url>
-        <loc>https://hujiarong.site/</loc>
-        <lastmod>2025-01-10</lastmod>
+        <loc>https://ling.hujiarong.site/</loc>
+        <lastmod>2026-01-11</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
 
-    <!-- 关于我页面 -->
+    <!-- 关于我们页面 -->
     <url>
-        <loc>https://hujiarong.site/#about</loc>
-        <lastmod>2025-01-10</lastmod>
+        <loc>https://ling.hujiarong.site/#about</loc>
+        <lastmod>2026-01-11</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
-    <!-- 友情链接页面 -->
+    <!-- 团队成员页面 -->
     <url>
-        <loc>https://hujiarong.site/#friends</loc>
-        <lastmod>2025-01-10</lastmod>
+        <loc>https://ling.hujiarong.site/#members</loc>
+        <lastmod>2026-01-11</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
 
-    <!-- 联系方式页面 -->
+    <!-- 联系我们页面 -->
     <url>
-        <loc>https://hujiarong.site/#contact</loc>
-        <lastmod>2025-01-10</lastmod>
+        <loc>https://ling.hujiarong.site/#contact</loc>
+        <lastmod>2026-01-11</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
 
     <!-- 项目展示页面 -->
     <url>
-        <loc>https://hujiarong.site/#projects</loc>
-        <lastmod>2025-01-10</lastmod>
+        <loc>https://ling.hujiarong.site/#projects</loc>
+        <lastmod>2026-01-11</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>

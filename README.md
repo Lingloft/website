@@ -1,13 +1,11 @@
-# 主核Kernyr 的个人网站
+# 灵阁 LingLoft 团队官网
 
-这是我用 Nuxt 做的个人网站，主要用来展示我的个人信息、做过的项目和联系方式。
+这是灵阁团队的官方网站，基于 Nuxt 3 开发，采用战术 UI 风格设计，展示团队信息、成员、项目及联系方式。
 
 ## 怎么联系我
 
-- GitHub: [kernel4632](http://github.com/kernel4632)
-- 哔哩哔哩: [主核Kernyr](https://space.bilibili.com/545450739)
-- 微信: 17137214543
-- QQ: [917811726](https://qm.qq.com/q/7PEdzand7O)
+- GitHub: [Lingloft](https://github.com/Lingloft)
+- 哔哩哔哩: [灵阁LingLoft](https://space.bilibili.com/545450739)
 
 ## 怎么在本地运行这个网站
 
@@ -63,4 +61,4 @@ GNU General Public License v3.0 (GPL v3.0)
 
 ---
 
-© 2025 主核Kernyr
+© 2024-2026 灵阁 LingLoft

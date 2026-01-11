@@ -225,6 +225,14 @@ function handleClick(): void {
     transition: var(--transition-default);
 }
 
+/* 适配电脑端 */
+
+@media (min-width: 768px) {
+    .base-card--friend {
+        width: 250px;
+    }
+}
+
 /* ==================== 可点击卡片样式 ==================== */
 
 .base-card--clickable {
@@ -385,6 +393,7 @@ function handleClick(): void {
 .base-card:hover .card-icon--project {
     filter: brightness(1) drop-shadow(0 0 10px var(--accent-color-glow));
 }
+
 
 /* ==================== 扫描环 ==================== */
 

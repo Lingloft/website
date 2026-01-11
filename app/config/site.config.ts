@@ -1,11 +1,8 @@
 /**
  * 站点配置文件 - 灵阁 LingLoft
- * 
+ *
  * 集中管理站点的所有可定制配置
  * 修改此文件即可快速定制站点内容
- * 
- * 视觉风格：明日方舟 / 战术UI / 未来舰队控制台
- * 文案语境：未来舰队指挥中心
  */
 
 import type { PageConfig } from '~/types'
@@ -30,24 +27,24 @@ export const SITE_MOTTO = '创新是我们基因的一部分'
 /**
  * 站点描述（用于 SEO）
  */
-export const SITE_DESCRIPTION = '灵阁 LingLoft - 一支专注于前沿技术探索与创新的精英团队。我们在代码的星海中航行，以技术为引擎，以创意为燃料，构建通往未来的数字桥梁。'
+export const SITE_DESCRIPTION = '灵阁是一个年轻的创意技术团队，成员来自不同领域，擅长前端开发、后端运维、游戏设计、平面设计、3D建模、音乐创作和AI应用。我们喜欢把各种有趣的想法变成现实。'
 
 /**
  * 站点关键词（用于 SEO）
  */
-export const SITE_KEYWORDS = 'LingLoft, 灵阁, 技术团队, 前端开发, AI算法, 游戏开发, 创新团队, 软件开发, 数字创意'
+export const SITE_KEYWORDS = '灵阁, LingLoft, 技术团队, 前端开发, 后端开发, 游戏设计, 平面设计, 3D建模, 音乐制作, AI应用, 创意团队'
 
 /**
  * 站点作者
  */
-export const SITE_AUTHOR = '灵阁 LingLoft'
+export const SITE_AUTHOR = '灵阁团队'
 
 // ==================== SEO 配置 ====================
 
 /**
  * 站点 URL（用于生成 canonical URL 和 sitemap）
  */
-export const SITE_URL = 'https://lingloft.dev'
+export const SITE_URL = 'https://ling.hujiarong.site'
 
 /**
  * 站点语言
@@ -62,7 +59,7 @@ export const SITE_LOCALE = 'zh_CN'
 /**
  * Open Graph 图片（用于社交媒体分享）
  */
-export const OG_IMAGE = '/assets/avatar.jpg'
+export const OG_IMAGE = '/logo.svg'
 
 /**
  * Twitter 用户名（如果有）
@@ -80,12 +77,12 @@ export const SITE_TYPE = 'website'
  * 团队信息（用于 JSON-LD 结构化数据）
  */
 export const TEAM_INFO = {
-  name: '灵阁 LingLoft',
+  name: '灵阁',
   alternateName: 'LingLoft',
-  description: '前沿技术探索与创新团队',
-  slogan: '探索未知领域，构建无限可能',
+  description: '一个年轻的跨领域创意技术团队，专注于把有趣的想法变成现实',
+  slogan: '创新是我们基因的一部分',
   foundingDate: '2024',
-  skills: ['前端开发', 'AI算法', '游戏开发', '系统架构', '创意设计'],
+  skills: ['前端开发', '后端运维', '游戏设计', '平面设计', '3D建模', '音乐创作', 'AI应用'],
   sameAs: [
     'https://github.com/lingloft',
   ],
@@ -99,7 +96,7 @@ export const PERSON_INFO = TEAM_INFO
 /**
  * 页面配置列表
  * 定义所有页面的基本信息
- * 
+ *
  * 如需添加新页面：
  * 1. 在 types/index.ts 中添加页面名称
  * 2. 在此处添加页面配置
@@ -109,27 +106,27 @@ export const PERSON_INFO = TEAM_INFO
 export const PAGE_CONFIGS: PageConfig[] = [
   {
     id: '主页',
-    description: '灵阁 LingLoft - 舰队指挥中心',
+    description: '灵阁 - 一个年轻的跨领域创意技术团队',
   },
   {
     id: '关于我',
-    title: '舰队档案',
-    description: '了解灵阁团队 - 我们的使命与愿景',
+    title: '关于我们',
+    description: '了解灵阁团队 - 我们是谁，我们做什么',
   },
   {
     id: '友情链接',
-    title: '星际联盟',
-    description: '灵阁的盟友舰队 - 友情链接',
+    title: '团队成员',
+    description: '认识灵阁的小伙伴们',
   },
   {
     id: '联系方式',
-    title: '通讯频道',
-    description: '联系灵阁团队 - 建立通讯链接',
+    title: '联系我们',
+    description: '想和我们聊聊？这里有各种联系方式',
   },
   {
     id: '我的项目',
-    title: '作战系统',
-    description: '灵阁的项目展示 - 我们的技术成果',
+    title: '我们的项目',
+    description: '看看灵阁团队做过的一些有趣项目',
   },
 ]
 

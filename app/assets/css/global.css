@@ -66,8 +66,8 @@ body {
 /* ==================== 通用元素样式 ==================== */
 
 * {
-    /* 默认过渡动画 */
-    transition: var(--transition-default);
+    /* 移除全局过渡动画以提升性能 */
+    /* transition: var(--transition-default); */
 
     /* 字体设置 */
     font-weight: 500;
@@ -225,7 +225,6 @@ button:active {
     visibility: hidden;
     transform: scale(0);
     opacity: 0;
-    filter: blur(10px);
     pointer-events: none;
 }
 
@@ -233,7 +232,6 @@ button:active {
     visibility: visible;
     transform: scale(1);
     opacity: 1;
-    filter: blur(0);
     pointer-events: auto;
 }
 

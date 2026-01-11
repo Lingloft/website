@@ -25,7 +25,7 @@
 
 <template>
   <!-- 主应用容器 -->
-  <div id="app-container" role="main" aria-label="灵阁 LingLoft 团队主页">
+  <div id="app-container" role="main" aria-label="灵阁 LingLoft 团队官网">
     <!-- 全局背景效果 -->
     <div class="global-effects" aria-hidden="true">
       <!-- 渐变背景 -->
@@ -55,7 +55,7 @@
         <span class="time-display">{{ currentTime }}</span>
       </div>
       <div class="top-bar__right">
-        <span class="version-label">v2.0.24</span>
+        <span class="version-label">v2.1.0</span>
       </div>
     </div>
 

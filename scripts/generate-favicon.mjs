@@ -11,35 +11,35 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const rootDir = join(__dirname, "..");
 const publicDir = join(rootDir, "public");
-const avatarPath = join(publicDir, "assets", "avatar.jpg");
+const logoPath = join(publicDir, "logo.svg");
 
 async function generateFavicons() {
   console.log("开始生成 favicon 文件...");
 
   try {
-    // 读取原始头像
-    const avatar = sharp(avatarPath);
+    // 读取原始 Logo
+    const logo = sharp(logoPath);
 
     // 生成 favicon-16x16.png
-    await avatar
+    await logo
       .clone()
-      .resize(16, 16, { fit: "cover" })
+      .resize(16, 16, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
       .png()
       .toFile(join(publicDir, "favicon-16x16.png"));
     console.log("✓ 生成 favicon-16x16.png");
 
     // 生成 favicon-32x32.png
-    await avatar
+    await logo
       .clone()
-      .resize(32, 32, { fit: "cover" })
+      .resize(32, 32, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
       .png()
       .toFile(join(publicDir, "favicon-32x32.png"));
     console.log("✓ 生成 favicon-32x32.png");
 
     // 生成 apple-touch-icon.png (180x180)
-    await avatar
+    await logo
       .clone()
-      .resize(180, 180, { fit: "cover" })
+      .resize(180, 180, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
       .png()
       .toFile(join(publicDir, "apple-touch-icon.png"));
     console.log("✓ 生成 apple-touch-icon.png");
@@ -47,21 +47,21 @@ async function generateFavicons() {
     // 生成 favicon.ico (包含多个尺寸: 16x16, 32x32, 48x48)
     // ICO 格式需要特殊处理，我们使用 PNG 作为主要格式
     // 并生成一个 32x32 的 ico 文件
-    const ico32Buffer = await avatar
+    const ico32Buffer = await logo
       .clone()
-      .resize(32, 32, { fit: "cover" })
+      .resize(32, 32, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
       .png()
       .toBuffer();
 
-    const ico16Buffer = await avatar
+    const ico16Buffer = await logo
       .clone()
-      .resize(16, 16, { fit: "cover" })
+      .resize(16, 16, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
       .png()
       .toBuffer();
 
-    const ico48Buffer = await avatar
+    const ico48Buffer = await logo
       .clone()
-      .resize(48, 48, { fit: "cover" })
+      .resize(48, 48, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
       .png()
       .toBuffer();
 
@@ -110,17 +110,17 @@ async function generateFavicons() {
     console.log("✓ 生成 favicon.ico");
 
     // 额外生成一个 192x192 的 PNG 用于 PWA
-    await avatar
+    await logo
       .clone()
-      .resize(192, 192, { fit: "cover" })
+      .resize(192, 192, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
       .png()
       .toFile(join(publicDir, "icon-192x192.png"));
     console.log("✓ 生成 icon-192x192.png");
 
     // 生成 512x512 的 PNG 用于 PWA
-    await avatar
+    await logo
       .clone()
-      .resize(512, 512, { fit: "cover" })
+      .resize(512, 512, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
       .png()
       .toFile(join(publicDir, "icon-512x512.png"));
     console.log("✓ 生成 icon-512x512.png");

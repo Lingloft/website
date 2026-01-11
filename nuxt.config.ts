@@ -1,7 +1,7 @@
 /**
  * Nuxt 配置文件
  *
- * 项目名称：Kernyr 个人主页
+ * 项目名称：灵阁 LingLoft 团队官网
  * 技术栈：Nuxt 3 + Vue 3 Composition API
  *
  * 配置说明：
@@ -40,7 +40,7 @@ export default defineNuxtConfig({
     // 页面 head 配置 - 全面的 SEO 优化
     head: {
       // 页面标题
-      title: "主核Kernyr - 永远相信自己可以不自量力地改变世界",
+      title: "灵阁 - 创意技术团队",
 
       // 字符编码
       charset: "utf-8",
@@ -59,14 +59,14 @@ export default defineNuxtConfig({
         {
           name: "description",
           content:
-            "主核Kernyr的个人主页 - 技术探索者、游戏开发追梦人。专注于前端开发、AI算法、平面设计和游戏机制研究。永远相信自己可以不自量力地改变世界。",
+            "灵阁是一个年轻的创意技术团队，成员来自不同领域，擅长前端开发、后端运维、游戏设计、平面设计、3D建模、音乐创作和AI应用。我们喜欢把各种有趣的想法变成现实。",
         },
         {
           name: "keywords",
           content:
-            "Kernyr, 主核, 个人主页, 前端开发, AI算法, 游戏开发, 平面设计, 广州美术学院, 技术博客, 程序员, 炼丹蓝图, DEQ-RWKV, 超级鹦鹉",
+            "灵阁, LingLoft, 技术团队, 前端开发, 后端开发, 游戏设计, 平面设计, 3D建模, 音乐制作, AI应用, 创意团队",
         },
-        { name: "author", content: "主核Kernyr" },
+        { name: "author", content: "灵阁团队" },
 
         // 搜索引擎指令
         {
@@ -77,10 +77,10 @@ export default defineNuxtConfig({
         { name: "googlebot", content: "index, follow" },
         { name: "bingbot", content: "index, follow" },
 
-        // 主题色配置
-        { name: "theme-color", content: "#1a1a2e" },
-        { name: "msapplication-TileColor", content: "#1a1a2e" },
-        { name: "msapplication-navbutton-color", content: "#1a1a2e" },
+        // 主题色配置 - 深碳黑
+        { name: "theme-color", content: "#0a0a0f" },
+        { name: "msapplication-TileColor", content: "#0a0a0f" },
+        { name: "msapplication-navbutton-color", content: "#0a0a0f" },
         {
           name: "apple-mobile-web-app-status-bar-style",
           content: "black-translucent",
@@ -89,42 +89,42 @@ export default defineNuxtConfig({
         // 移动端优化
         { name: "format-detection", content: "telephone=no" },
         { name: "apple-mobile-web-app-capable", content: "yes" },
-        { name: "apple-mobile-web-app-title", content: "主核Kernyr" },
+        { name: "apple-mobile-web-app-title", content: "灵阁" },
         { name: "mobile-web-app-capable", content: "yes" },
-        { name: "application-name", content: "主核Kernyr" },
+        { name: "application-name", content: "灵阁 LingLoft" },
 
         // Open Graph 协议 - 社交媒体分享优化
         { property: "og:type", content: "website" },
-        { property: "og:site_name", content: "主核Kernyr" },
-        { property: "og:title", content: "主核Kernyr - 个人主页" },
+        { property: "og:site_name", content: "灵阁" },
+        { property: "og:title", content: "灵阁 - 创意技术团队" },
         {
           property: "og:description",
           content:
-            "技术探索者、游戏开发追梦人。专注于前端开发、AI算法、平面设计和游戏机制研究。永远相信自己可以不自量力地改变世界。",
+            "一个年轻的跨领域创意技术团队，专注于把有趣的想法变成现实。涉猎前端开发、游戏设计、平面设计、音乐创作、AI应用等领域。",
         },
         {
           property: "og:image",
-          content: "https://hujiarong.site/assets/avatar.jpg",
+          content: "https://ling.hujiarong.site/logo.svg",
         },
         { property: "og:image:width", content: "512" },
         { property: "og:image:height", content: "512" },
-        { property: "og:image:alt", content: "主核Kernyr的头像" },
-        { property: "og:url", content: "https://hujiarong.site" },
+        { property: "og:image:alt", content: "灵阁团队Logo" },
+        { property: "og:url", content: "https://ling.hujiarong.site" },
         { property: "og:locale", content: "zh_CN" },
 
         // Twitter Card - Twitter 分享优化
         { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:title", content: "主核Kernyr - 个人主页" },
+        { name: "twitter:title", content: "灵阁 - 创意技术团队" },
         {
           name: "twitter:description",
           content:
-            "技术探索者、游戏开发追梦人。专注于前端开发、AI算法、平面设计和游戏机制研究。",
+            "一个年轻的跨领域创意技术团队，专注于把有趣的想法变成现实。",
         },
         {
           name: "twitter:image",
-          content: "https://hujiarong.site/assets/avatar.jpg",
+          content: "https://ling.hujiarong.site/logo.svg",
         },
-        { name: "twitter:image:alt", content: "主核Kernyr的头像" },
+        { name: "twitter:image:alt", content: "灵阁团队Logo" },
 
         // 其他 SEO 相关
         { name: "revisit-after", content: "7 days" },
@@ -134,7 +134,7 @@ export default defineNuxtConfig({
         // 版权信息
         {
           name: "copyright",
-          content: "© 2022-2025 主核Kernyr. All rights reserved.",
+          content: "© 2024-2026 灵阁 LingLoft. All rights reserved.",
         },
 
         // 地理位置信息（可选，有助于本地 SEO）
@@ -165,7 +165,7 @@ export default defineNuxtConfig({
         },
 
         // Canonical URL - 防止重复内容
-        { rel: "canonical", href: "https://hujiarong.site" },
+        { rel: "canonical", href: "https://ling.hujiarong.site" },
 
         // DNS 预解析 - 提升性能
         { rel: "dns-prefetch", href: "//fonts.googleapis.com" },
@@ -184,7 +184,7 @@ export default defineNuxtConfig({
         },
 
         // 作者信息
-        { rel: "author", href: "https://hujiarong.site" },
+        { rel: "author", href: "https://ling.hujiarong.site" },
 
         // 站点地图
         { rel: "sitemap", type: "application/xml", href: "/sitemap.xml" },
@@ -210,75 +210,72 @@ export default defineNuxtConfig({
               // WebSite 结构化数据
               {
                 "@type": "WebSite",
-                "@id": "https://hujiarong.site/#website",
-                url: "https://hujiarong.site",
-                name: "主核Kernyr",
+                "@id": "https://ling.hujiarong.site/#website",
+                url: "https://ling.hujiarong.site",
+                name: "灵阁",
+                alternateName: "LingLoft",
                 description:
-                  "主核Kernyr的个人主页 - 技术探索者、游戏开发追梦人",
+                  "灵阁是一个年轻的创意技术团队，专注于把有趣的想法变成现实",
                 inLanguage: "zh-CN",
                 publisher: {
-                  "@id": "https://hujiarong.site/#person",
+                  "@id": "https://ling.hujiarong.site/#organization",
                 },
               },
-              // Person 结构化数据
+              // Organization 结构化数据
               {
-                "@type": "Person",
-                "@id": "https://hujiarong.site/#person",
-                name: "主核Kernyr",
-                alternateName: "Kernyr",
-                description: "技术探索者、游戏开发追梦人",
-                url: "https://hujiarong.site",
-                image: {
+                "@type": "Organization",
+                "@id": "https://ling.hujiarong.site/#organization",
+                name: "灵阁",
+                alternateName: "LingLoft",
+                description: "一个年轻的跨领域创意技术团队",
+                url: "https://ling.hujiarong.site",
+                logo: {
                   "@type": "ImageObject",
-                  url: "https://hujiarong.site/assets/avatar.jpg",
+                  url: "https://ling.hujiarong.site/logo.svg",
                   width: 512,
                   height: 512,
                 },
-                jobTitle: "学生 / 开发者",
-                affiliation: {
-                  "@type": "EducationalOrganization",
-                  name: "广州美术学院",
-                },
+                foundingDate: "2024",
+                slogan: "创新是我们基因的一部分",
                 knowsAbout: [
                   "前端开发",
-                  "AI算法",
+                  "后端运维",
+                  "游戏设计",
                   "平面设计",
-                  "游戏机制研究",
-                  "Vue.js",
-                  "Nuxt.js",
-                  "TypeScript",
+                  "3D建模",
+                  "音乐创作",
+                  "AI应用",
                 ],
                 sameAs: [
-                  "https://space.bilibili.com/545450739",
-                  "https://github.com/kernel4632",
+                  "https://github.com/lingloft",
                 ],
               },
               // WebPage 结构化数据
               {
                 "@type": "WebPage",
-                "@id": "https://hujiarong.site/#webpage",
-                url: "https://hujiarong.site",
-                name: "主核Kernyr - 个人主页",
+                "@id": "https://ling.hujiarong.site/#webpage",
+                url: "https://ling.hujiarong.site",
+                name: "灵阁 - 创意技术团队",
                 description:
-                  "主核Kernyr的个人主页 - 技术探索者、游戏开发追梦人。专注于前端开发、AI算法、平面设计和游戏机制研究。",
+                  "灵阁是一个年轻的创意技术团队，成员来自不同领域，擅长前端开发、后端运维、游戏设计、平面设计、3D建模、音乐创作和AI应用。",
                 isPartOf: {
-                  "@id": "https://hujiarong.site/#website",
+                  "@id": "https://ling.hujiarong.site/#website",
                 },
                 about: {
-                  "@id": "https://hujiarong.site/#person",
+                  "@id": "https://ling.hujiarong.site/#organization",
                 },
                 inLanguage: "zh-CN",
               },
               // BreadcrumbList 结构化数据
               {
                 "@type": "BreadcrumbList",
-                "@id": "https://hujiarong.site/#breadcrumb",
+                "@id": "https://ling.hujiarong.site/#breadcrumb",
                 itemListElement: [
                   {
                     "@type": "ListItem",
                     position: 1,
                     name: "首页",
-                    item: "https://hujiarong.site",
+                    item: "https://ling.hujiarong.site",
                   },
                 ],
               },
@@ -302,9 +299,9 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       // 站点基础信息
-      siteName: "主核Kernyr",
-      siteDescription: "永远相信自己可以不自量力地改变世界",
-      siteUrl: "https://hujiarong.site",
+      siteName: "灵阁",
+      siteDescription: "创新是我们基因的一部分",
+      siteUrl: "https://ling.hujiarong.site",
     },
   },
 

@@ -162,11 +162,7 @@ const decorationRight = computed(() => {
     transform: translateZ(0);
     backface-visibility: hidden;
 
-    /* 过渡动画 - 仅使用 transform 和 opacity（GPU 加速） */
-    transition:
-        transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-        opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-        visibility 0s linear 0s;
+    transition:0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 /* ==================== 显示状态 ==================== */
@@ -186,7 +182,7 @@ const decorationRight = computed(() => {
     opacity: 0;
     z-index: 1;
     pointer-events: none;
-    transition: 0.2s ease-in-out;
+    transition: 0.1s ease;
 }
 
 /* ==================== 战术网格背景 ==================== */
@@ -239,7 +235,14 @@ const decorationRight = computed(() => {
         rgba(0, 212, 255, 0.03) 50%,
         transparent 100%
     );
+    /* 默认暂停动画 */
     animation: scanline var(--scanline-speed) linear infinite;
+    animation-play-state: paused;
+}
+
+/* 仅在可见页面播放扫描线动画 */
+.page-section.visible .page-section__scanline::before {
+    animation-play-state: running;
 }
 
 /* ==================== 角落装饰 ==================== */
@@ -352,6 +355,7 @@ const decorationRight = computed(() => {
 .page-section__divider-line {
     width: 120px;
     height: 3px;
+    /* 把transparent改成var(--accent-color)的半透明色 */
     background: linear-gradient(90deg, transparent, var(--accent-color) 50%, transparent);
     box-shadow: var(--glow-sm);
 }

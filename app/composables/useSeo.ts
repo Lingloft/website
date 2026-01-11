@@ -42,17 +42,17 @@ interface SeoConfig {
  * ```ts
  * // 在页面组件中使用
  * useSeo({
- *   title: '关于我',
- *   description: '了解更多关于主核Kernyr的信息',
- *   keywords: ['个人介绍', '技术博客'],
+ *   title: '关于我们',
+ *   description: '了解更多关于灵阁团队的信息',
+ *   keywords: ['团队介绍', '创意技术'],
  * })
  * ```
  */
 export function useSeo(config: SeoConfig = {}) {
   // 构建完整标题
-  const fullTitle = config.title 
-    ? `${config.title} - ${SITE_NAME}` 
-    : `${SITE_NAME} - 个人主页`
+  const fullTitle = config.title
+    ? `${config.title} - ${SITE_NAME}`
+    : `${SITE_NAME} - 创意技术团队`
   
   // 使用默认描述或自定义描述
   const description = config.description || SITE_DESCRIPTION
@@ -121,7 +121,7 @@ export function generatePageSchema(pageData: {
       'url': SITE_URL,
     },
     'author': {
-      '@type': 'Person',
+      '@type': 'Organization',
       'name': SITE_AUTHOR,
     },
     'inLanguage': SITE_LANGUAGE,
@@ -165,14 +165,14 @@ export function generateProjectSchema(project: {
     'name': project.name,
     'description': project.description,
     ...(project.url && { 'url': project.url }),
-    ...(project.image && { 
+    ...(project.image && {
       'image': {
         '@type': 'ImageObject',
         'url': `${SITE_URL}${project.image}`,
       }
     }),
     'author': {
-      '@type': 'Person',
+      '@type': 'Organization',
       'name': SITE_AUTHOR,
     },
   }
