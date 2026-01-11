@@ -25,7 +25,7 @@ export const SITE_NAME_EN = 'LINGLOFT'
 /**
  * 站点副标题/座右铭
  */
-export const SITE_MOTTO = '// 创新是我们基因的一部分'
+export const SITE_MOTTO = '创新是我们基因的一部分'
 
 /**
  * 站点描述（用于 SEO）
@@ -175,10 +175,6 @@ export const ABOUT_DOMAINS = [
   '人工智能',
 ]
 
-/**
- * 团队标签列表（简化版，用于首页等）
- */
-export const ABOUT_TAGS = ['技术', '创新', '探索']
 
 /**
  * 团队介绍内容
@@ -247,22 +243,22 @@ export const DATA_FILE_PATH = '/data.json'
  * 按钮文案 - 舰队语境
  */
 export const BUTTON_TEXTS = {
-  learnMore: '查阅档案',
-  friends: '星际联盟',
-  projects: '作战系统',
-  contact: '通讯频道',
+  learnMore: '团队信息',
+  friends: '团队成员',
+  projects: '团队项目',
+  contact: '联系我们',
   back: '返回',
-  home: '指挥中心',
+  home: '返回首页',
 }
 
 /**
  * 页面标题 - 舰队语境
  */
 export const PAGE_TITLES = {
-  about: '舰队档案',
-  friends: '星际联盟',
-  contact: '通讯频道',
-  projects: '作战系统',
+  about: '团队信息',
+  friends: '团队成员',
+  contact: '联系我们',
+  projects: '团队项目',
 }
 
 /**

@@ -145,7 +145,7 @@ async function handleContactClick(contact: ContactData): Promise<void> {
 
 .contacts-section {
     width: 100%;
-    max-width: 500px;
+    max-width: 350px;
     font-style: normal;
     display: flex;
     flex-direction: column;

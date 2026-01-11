@@ -127,10 +127,10 @@ const { switchPage } = usePageNavigation()
     gap: 8px;
 }
 
-/* ==================== 状态指示器 ==================== */
+/* ==================== 状态指示器 - 仅手机端显示 ==================== */
 
 .status-indicator {
-    display: flex;
+    display: none;
     align-items: center;
     gap: 8px;
     margin-bottom: 20px;
@@ -157,9 +157,10 @@ const { switchPage } = usePageNavigation()
     letter-spacing: var(--letter-spacing-wide);
 }
 
-/* ==================== 欢迎语 ==================== */
+/* ==================== 欢迎语 - 仅手机端显示 ==================== */
 
 .welcome-text {
+    display: none;
     font-family: var(--font-family-mono);
     font-size: var(--font-size-sm);
     color: var(--text-tertiary);
@@ -301,7 +302,7 @@ const { switchPage } = usePageNavigation()
     font-family: var(--font-family-mono);
     font-size: var(--font-size-sm);
     font-weight: 500;
-    margin-bottom: 24px;
+    margin-bottom: 0;
     color: var(--text-secondary);
     letter-spacing: var(--letter-spacing);
 }
@@ -341,6 +342,15 @@ const { switchPage } = usePageNavigation()
 /* ==================== 响应式调整 ==================== */
 
 @media (max-width: 768px) {
+    /* 手机端显示状态指示器和欢迎语 */
+    .status-indicator {
+        display: flex;
+    }
+
+    .welcome-text {
+        display: block;
+    }
+
     .name {
         font-size: var(--font-size-3xl);
     }
@@ -383,6 +393,7 @@ const { switchPage } = usePageNavigation()
 
 @media (max-width: 480px) {
     .status-indicator {
+        display: flex;
         padding: 6px 12px;
     }
 

@@ -423,10 +423,10 @@ function handleClick(): void {
 /* ==================== 卡片标题样式 ==================== */
 
 .card-title {
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-2xl);
     margin: 0;
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--accent-color);
     text-align: center;
     letter-spacing: var(--letter-spacing);
 }
@@ -501,31 +501,5 @@ function handleClick(): void {
     border: 0;
 }
 
-/* ==================== 响应式调整 ==================== */
 
-@media (max-width: 768px) {
-    .base-card {
-        width: 100%;
-        max-width: 280px;
-        padding: 20px;
-        min-height: auto;
-    }
-
-    .card-corner {
-        width: 10px;
-        height: 10px;
-    }
-
-    .card-action {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@media (max-width: 480px) {
-    .base-card {
-        width: 100%;
-        max-width: 260px;
-    }
-}
 </style>

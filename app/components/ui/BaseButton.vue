@@ -23,6 +23,7 @@
         <span class="button-content">
             <span class="button-icon" aria-hidden="true">◆</span>
             <span class="button-text"><slot /></span>
+            <span class="button-icon" aria-hidden="true">◆</span>
         </span>
         
         <!-- 发光边框效果 -->

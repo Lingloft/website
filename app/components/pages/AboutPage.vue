@@ -310,17 +310,24 @@ function getLineClass(line: string, index: number): string {
 }
 
 .modal-close {
-    background: none;
-    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-secondary);
+    border-radius: var(--radius-sm);
     color: var(--text-tertiary);
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-sm);
     cursor: pointer;
-    padding: 4px 8px;
-    transition: color var(--transition-fast);
+    transition: var(--transition-default);
 }
 
 .modal-close:hover {
     color: var(--accent-color);
+    border-color: var(--accent-color);
+    background: var(--bg-card-hover);
 }
 
 /* ==================== 领域列表 ==================== */
@@ -337,6 +344,7 @@ function getLineClass(line: string, index: number): string {
 .domain-item {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 12px;
     padding: 12px 16px;
     background: var(--bg-card);
@@ -347,7 +355,7 @@ function getLineClass(line: string, index: number): string {
 
 .domain-item:hover {
     border-color: var(--accent-color);
-    transform: translateX(4px);
+    background: var(--bg-card-hover);
 }
 
 .domain-index {
@@ -461,13 +469,17 @@ function getLineClass(line: string, index: number): string {
 
 .terminal-content {
     padding: 20px;
-    text-align: left;
+    text-align: center;
     white-space: pre-wrap;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .terminal-line {
     display: flex;
     align-items: flex-start;
+    justify-content: center;
     gap: 8px;
     margin-bottom: 4px;
 }
