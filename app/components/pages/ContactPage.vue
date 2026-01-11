@@ -18,7 +18,7 @@
 -->
 
 <template>
-    <PageSection page-id="联系方式" title="通讯频道">
+    <PageSection page-id="联系方式" title="联系我们">
         <!-- 联系方式区域 -->
         <address class="contacts-section" aria-label="联系方式列表">
             <!-- 区域标签 -->

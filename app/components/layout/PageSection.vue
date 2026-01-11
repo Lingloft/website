@@ -157,29 +157,36 @@ const decorationRight = computed(() => {
     overflow-x: hidden;
     padding: 60px 20px;
 
-    /* 过渡动画 */
-    transition: var(--transition-default);
+    /* GPU 加速优化 */
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+
+    /* 过渡动画 - 仅使用 transform 和 opacity（GPU 加速） */
+    transition:
+        transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+        visibility 0s linear 0s;
 }
 
 /* ==================== 显示状态 ==================== */
 
 .page-section.visible {
     visibility: visible;
-    transform: scale(1);
+    transform: scale(1) translateZ(0);
     opacity: 1;
     z-index: 10;
-    filter: blur(0);
 }
 
 /* ==================== 隐藏状态 ==================== */
 
 .page-section.hidden {
     visibility: hidden;
-    transform: scale(0);
+    transform: scale(0) translateZ(0);
     opacity: 0;
     z-index: 1;
-    filter: blur(10px);
     pointer-events: none;
+    transition: 0.2s ease-in-out;
 }
 
 /* ==================== 战术网格背景 ==================== */

@@ -18,7 +18,7 @@
 -->
 
 <template>
-    <PageSection page-id="关于我" title="团队档案">
+    <PageSection page-id="关于我" title="关于我们">
         <!-- 团队介绍文章 -->
         <article class="about-article" itemscope itemtype="https://schema.org/Organization" aria-label="关于灵阁团队的介绍">
             

@@ -18,7 +18,7 @@
 -->
 
 <template>
-    <PageSection page-id="友情链接" title="星际联盟">
+    <PageSection page-id="友情链接" title="团队成员">
         <!-- 朋友列表区域 -->
         <section class="friends-section" aria-label="友情链接列表">
             <!-- 区域标签 -->

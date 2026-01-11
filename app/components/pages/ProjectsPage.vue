@@ -18,7 +18,7 @@
 -->
 
 <template>
-  <PageSection page-id="我的项目" title="作战系统">
+  <PageSection page-id="我的项目" title="团队项目">
     <!-- 项目展示区域 -->
     <section class="projects-section" aria-label="项目作品列表">
       <!-- 区域标签 -->
